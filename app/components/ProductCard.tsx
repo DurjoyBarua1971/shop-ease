@@ -16,8 +16,8 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="border rounded p-4 flex flex-col">
-      <div className="relative">
+    <div className="border rounded p-4 mt-4 flex flex-col bg-gray-900">
+      <div className="relative mt-2">
         <Image
           src={product.image}
           alt={product.name}
@@ -33,16 +33,18 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
         )}
       </div>
-      <h3 className="text-lg font-bold mt-1">{product.name}</h3>
-      <p>৳ {product.price.toFixed(2)}</p>
-      <div className="flex justify-between px-2">
+      <div className="flex items-center justify-between mt-4">
+        <h3 className="text-xl font-bold">{product.name}</h3>
+        <p className="text-blue-400 font-semibold text-lg">৳ {product.price}</p>
+      </div>
+      <div className="flex mt-2 justify-between px-2">
         <p>⭐ {product.rating}</p>
         {stock > 0 && <p>👉 {stock} </p>}
       </div>
       <button
         disabled={stock === 0}
         onClick={handleAddToCart}
-        className="mt-auto bg-blue-500 text-white py-1 px-2 rounded disabled:bg-gray-400"
+        className="my-4 bg-blue-500 text-white py-1 px-2 rounded disabled:bg-gray-400"
       >
         {stock > 0 ? "Add to Cart" : "Out of Stock"}
       </button>
