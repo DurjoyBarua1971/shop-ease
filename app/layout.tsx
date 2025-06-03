@@ -5,8 +5,8 @@ import { CartProvider } from "./context/CartContext";
 import Navbar from "./components/Navbar";
 
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.variable} antialiased pt-16`}
+        suppressHydrationWarning={true}
       >
         <CartProvider>
           <div className="flex flex-col h-screen font-sans px-4">
