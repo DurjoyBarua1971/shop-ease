@@ -26,7 +26,7 @@ function ProductsPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 mt-8">
         <input
           type="text"
           placeholder="Search..."

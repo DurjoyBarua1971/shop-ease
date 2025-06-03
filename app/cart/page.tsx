@@ -14,7 +14,7 @@ function page() {
   return (
     <>
       {state.cartItems.length === 0 ? (
-        <div className="flex justify-center items-center mx-auto gap-3 flex-col mt-16">
+        <div className="flex justify-center items-center mx-auto gap-3 flex-col mt-20">
           <h1 className="text-3xl font-bold">Your Cart is Empty</h1>
           <p className="text-gray-400"> Add some products to get started!</p>
           <Link
