@@ -16,7 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="border rounded p-4 mt-4 flex flex-col bg-gray-900">
+    <div className="border rounded p-4 flex flex-col bg-gray-900">
       <div className="relative mt-2">
         <Image
           src={product.image}
