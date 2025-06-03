@@ -23,9 +23,12 @@ function Navbar() {
 
   return (
     <nav className="fixed top-0 flex items-center justify-between w-full max-w-5xl mx-auto bg-[#111827]/80 backdrop-blur-md shadow-md px-4 py-6 z-10 left-0 right-0">
-      <h1 className="text-2xl font-extrabold tracking-wide text-[#93C5FD]">
+      <Link
+        href="/"
+        className="text-2xl font-extrabold tracking-wide text-[#93C5FD]"
+      >
         ShopEase
-      </h1>
+      </Link>
       <div className="space-x-4">
         <Link href="/products" className={isActive("/products")}>
           Product
@@ -33,10 +36,10 @@ function Navbar() {
         <Link href="/cart" className={isActive("/cart")}>
           🛒 Cart
           {itemCount > 0 && (
-                <span className="absolute bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold translate-x-33 -translate-y-8">
-                  {itemCount}
-                </span>
-              )}
+            <span className="absolute bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold translate-x-33 -translate-y-8">
+              {itemCount}
+            </span>
+          )}
         </Link>
       </div>
     </nav>
