@@ -37,7 +37,7 @@ function ProductsPage() {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="border p-2 rounded"
+          className="border p-2 rounded bg-gray-800"
         >
           <option value="default">Default</option>
           <option value="rating">Popularity</option>
