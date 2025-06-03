@@ -53,7 +53,7 @@ function OrderSummary() {
             </div>
           </div>
 
-          <button className="w-full mt-6 bg-blue-600 text-white font-medium py-3 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="w-full mt-6 bg-blue-700 text-white font-medium py-3 rounded-lg hover:bg-blue-800 transition-colors">
             Proceed to Checkout
           </button>
 
