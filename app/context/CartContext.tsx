@@ -9,7 +9,7 @@ interface CartContextType {
   dispatch: React.Dispatch<any>;
 }
 
-const CartContext = createContext<CartContextType|null>(null);
+const CartContext = createContext<CartContextType | null>(null);
 
 const initialState: CartState = {
   cartItems: [],
@@ -99,11 +99,9 @@ function cartReducer(state: CartState, action: any): CartState {
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = React.useReducer(cartReducer, initialState);
-  const contextValue = useMemo(() => ({ state, dispatch }), [state]);  
+  const contextValue = useMemo(() => ({ state, dispatch }), [state]);
   return (
-    <CartContext.Provider value={contextValue}>
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
 }
 

@@ -32,7 +32,7 @@ export default function RootLayout({
         <CartProvider>
           <div className="flex flex-col h-screen">
             <Navbar />
-            <div className="max-w-5xl w-full mx-auto p-4">{children}</div>
+            <div className="max-w-5xl w-full mx-auto py-4">{children}</div>
           </div>
         </CartProvider>
       </body>
