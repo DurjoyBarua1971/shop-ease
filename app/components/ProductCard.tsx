@@ -34,8 +34,8 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </div>
       <div className="flex items-center justify-between mt-4">
-        <h3 className="text-xl font-bold">{product.name}</h3>
-        <p className="text-blue-400 font-semibold text-lg">৳ {product.price}</p>
+        <h3 className="lg:text-2xl md:text-lg text-md font-bold truncate">{product.name}</h3>
+        <p className="text-blue-400 font-semibold text-lg">৳{product.price}</p>
       </div>
       <div className="flex mt-2 justify-between px-2">
         <p>⭐ {product.rating}</p>

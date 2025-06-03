@@ -26,7 +26,7 @@ function ProductsPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4 mt-8">
+      <div className="flex gap-4 justify-between items-center mb-4 mt-8">
         <input
           type="text"
           placeholder="Search..."
@@ -37,7 +37,7 @@ function ProductsPage() {
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="border p-2 rounded bg-gray-800"
+          className="border p-2 rounded bg-gray-800 w-1/2 xs:w-auto sm:w-auto"
         >
           <option value="default">Default</option>
           <option value="rating">Popularity</option>
