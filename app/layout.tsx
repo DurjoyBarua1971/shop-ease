@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`${inter.variable} antialiased pt-16`}
       >
         <CartProvider>
-          <div className="flex flex-col h-screen font-sans">
+          <div className="flex flex-col h-screen font-sans px-4">
             <Navbar />
             <div className="max-w-5xl w-full mx-auto py-4">{children}</div>
           </div>
