@@ -1,7 +1,62 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { products as productList } from "../lib/products";
+import ProductCard from "../components/ProductCard";
 
-function page() {
-  return <div>Product Page</div>;
+function ProductsPage() {
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("default");
+  const filteredProducts = productList.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sort) {
+      case "rating":
+        return b.rating - a.rating;
+      case "newest":
+        return new Date(b.created).getTime() - new Date(a.created).getTime();
+      case "low-high":
+        return a.price - b.price;
+      case "high-low":
+        return b.price - a.price;
+      default:
+        return 0;
+    }
+  });
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border p-2 rounded w-1/2"
+        />
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="default">Default</option>
+          <option value="rating">Rating</option>
+          <option value="newest">Newest</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+        </select>
+      </div>
+      {sortedProducts.length ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      ) : (
+        <p>No products found.</p>
+      )}
+    </div>
+  );
 }
 
-export default page;
+export default ProductsPage;

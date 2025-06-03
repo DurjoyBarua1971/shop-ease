@@ -9,7 +9,7 @@ interface CartContextType {
   dispatch: React.Dispatch<any>;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<CartContextType|null>(null);
 
 const initialState: CartState = {
   cartItems: [],
