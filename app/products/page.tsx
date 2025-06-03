@@ -40,7 +40,7 @@ function ProductsPage() {
           className="border p-2 rounded"
         >
           <option value="default">Default</option>
-          <option value="rating">Rating</option>
+          <option value="rating">Popularity</option>
           <option value="newest">Newest</option>
           <option value="low-high">Price: Low to High</option>
           <option value="high-low">Price: High to Low</option>
