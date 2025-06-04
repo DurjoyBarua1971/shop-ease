@@ -22,21 +22,23 @@ function CartItemComponent({ item }: { item: CartItem }) {
     dispatch({ type: "ADJUST_QUANTITY", id: item.id, delta: -1 });
   };
   return (
-    <>
-      <Image
-        src={item.image}
-        alt={item.name}
-        width={80}
-        height={80}
-        className="object-cover rounded-lg"
-      />
-      <div className="flex-1 min-w-0">
-        <h3 className="text-lg font-semibold text-white truncate">
-          {item.name}
-        </h3>
-        <p className="text-blue-400 font-semibold text-lg">৳ {item.price}</p>
+    <div className="flex flex-col p-4 sm:p-6 sm:flex-row sm:items-center space-y-10 sm:space-y-0 sm:space-x-4 sm:justify-between">
+      <div className="flex items-center space-x-4 justify-center sm:justify-start">
+        <Image
+          src={item.image}
+          alt={item.name}
+          width={80}
+          height={80}
+          className="object-cover rounded-lg"
+        />
+        <div className="sm:flex-1 min-w-0">
+          <h3 className="text-lg font-semibold text-white truncate">
+            {item.name}
+          </h3>
+          <p className="text-blue-400 font-semibold text-lg">৳ {item.price}</p>
+        </div>
       </div>
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center justify-center space-x-3">
         <button
           disabled={item.quantity <= 1}
           onClick={handleDecrement}
@@ -52,17 +54,17 @@ function CartItemComponent({ item }: { item: CartItem }) {
         >
           ✚
         </button>
+        <div className="relative">
+          <span>৳ {item.price * item.quantity}</span>
+          <button
+            onClick={handleRemoveFromCart}
+            className="px-2 rounded absolute top-0 right-0 transform translate-x-5 -translate-y-8 hover:cursor-pointer transition-colors"
+          >
+            ❌
+          </button>
+        </div>
       </div>
-      <div className="relative">
-        <span>৳ {item.price * item.quantity}</span>
-        <button
-          onClick={handleRemoveFromCart}
-          className="px-2 rounded absolute top-0 right-0 transform translate-x-5 -translate-y-10 hover:cursor-pointer transition-colors"
-        >
-          ❌
-        </button>
-      </div>
-    </>
+    </div>
   );
 }
 

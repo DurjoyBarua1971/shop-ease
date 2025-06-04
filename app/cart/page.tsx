@@ -33,7 +33,7 @@ function page() {
                 {state.cartItems.map((item, index) => (
                   <div
                     key={item.id}
-                    className={`p-6 flex items-center space-x-4 ${
+                    className={` ${
                       index !== state.cartItems.length - 1
                         ? "border-b border-gray-700"
                         : ""
