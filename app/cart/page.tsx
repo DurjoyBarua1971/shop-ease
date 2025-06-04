@@ -10,7 +10,9 @@ function page() {
   if (!cartContext) {
     throw new Error("CartContext is not available");
   }
+
   const { state } = cartContext;
+  
   return (
     <>
       {state.cartItems.length === 0 ? (

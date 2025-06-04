@@ -23,7 +23,6 @@ function cartReducer(state: CartState, action: any): CartState {
   switch (action.type) {
     case "ADD_TO_CART": {
       const { product } = action;
-      console.log("Adding to cart:", product);
       if (productStock[product.id] <= 0) {
         console.warn("Product out of stock:", product);
         return state;
@@ -48,7 +47,6 @@ function cartReducer(state: CartState, action: any): CartState {
 
     case "REMOVE_FROM_CART": {
       const id = action.id;
-      console.log("Removing from cart:", id);
       const item = cartItems.find((item) => item.id === id);
       if (!item) {
         console.warn("Item not found in cart:", id);

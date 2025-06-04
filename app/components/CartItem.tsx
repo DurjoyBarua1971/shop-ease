@@ -5,6 +5,7 @@ import Image from "next/image";
 
 function CartItemComponent({ item }: { item: CartItem }) {
   const cartContext = useCart();
+
   if (!cartContext) {
     throw new Error("CartContext is not available");
   }
@@ -15,12 +16,15 @@ function CartItemComponent({ item }: { item: CartItem }) {
   const handleRemoveFromCart = () => {
     dispatch({ type: "REMOVE_FROM_CART", id: item.id });
   };
+
   const handleIncrement = () => {
     dispatch({ type: "ADJUST_QUANTITY", id: item.id, delta: 1 });
   };
+
   const handleDecrement = () => {
     dispatch({ type: "ADJUST_QUANTITY", id: item.id, delta: -1 });
   };
+
   return (
     <div className="flex flex-col p-4 sm:p-6 sm:flex-row sm:items-center space-y-10 sm:space-y-0 sm:space-x-4 sm:justify-between">
       <div className="flex items-center space-x-4 justify-center sm:justify-start">
