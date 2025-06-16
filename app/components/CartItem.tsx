@@ -35,7 +35,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
           height={80}
           className="object-cover rounded-lg"
         />
-        <div className="sm:flex-1 min-w-0">
+        <div className="sm:flex-1 sm:min-w-0">
           <h3 className="text-lg font-semibold text-white truncate">
             {item.name}
           </h3>
@@ -46,7 +46,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
         <button
           disabled={item.quantity <= 1}
           onClick={handleDecrement}
-          className=" text-white px-2 py-1 rounded disabled:bg-gray-600 cursor-pointer "
+          className="text-white px-2 py-1 rounded disabled:bg-gray-600 cursor-pointer disabled:cursor-default"
         >
           ▬
         </button>
@@ -54,7 +54,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
         <button
           disabled={stock === 0}
           onClick={handleIncrement}
-          className=" text-white px-2 py-1 rounded cursor-pointer disabled:bg-gray-600"
+          className=" text-white px-2 py-1 rounded cursor-pointer disabled:cursor-default disabled:bg-gray-600"
         >
           ✚
         </button>
@@ -62,7 +62,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
           <span>৳ {item.price * item.quantity}</span>
           <button
             onClick={handleRemoveFromCart}
-            className="px-2 rounded absolute top-0 right-0 transform translate-x-5 -translate-y-8 hover:cursor-pointer transition-colors"
+            className="px-4 sm:top-0 sm:right-0 sm:transform sm:translate-x-5 sm:-translate-y-8 rounded absolute  hover:cursor-pointer transition-colors"
           >
             ❌
           </button>

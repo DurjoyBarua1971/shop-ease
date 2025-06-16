@@ -17,11 +17,11 @@ function page() {
     <>
       {state.cartItems.length === 0 ? (
         <div className="flex justify-center items-center mx-auto gap-3 flex-col mt-20">
-          <h1 className="text-3xl font-bold">Your Cart is Empty</h1>
-          <p className="text-gray-400"> Add some products to get started!</p>
+          <h1 className="text-2xl sm:text-3xl font-bold">Your Cart is Empty</h1>
+          <p className="text-gray-400 text-base sm:text-xl"> Add some products to get started!</p>
           <Link
             href="/products"
-            className="bg-blue-800 text-white px-6 font-semibold py-3 rounded-md hover:bg-blue-900 transition-colors mt-6"
+            className="bg-blue-800 text-base sm:text-xl text-white px-6 font-semibold py-3 rounded-md hover:bg-blue-900 transition-colors mt-6"
           >
             Continue Shopping
           </Link>
