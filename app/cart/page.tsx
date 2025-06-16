@@ -28,7 +28,7 @@ function page() {
         </div>
       ) : (
         <>
-          <h2 className="text-3xl font-bold my-6">Shopping Cart</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold my-6">Shopping Cart</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <div className="bg-gray-900 rounded-lg shadow-md border border-gray-700">

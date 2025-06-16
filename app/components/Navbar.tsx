@@ -25,7 +25,7 @@ function Navbar() {
     <nav className="fixed top-0 flex items-center justify-between w-full max-w-5xl mx-auto bg-[#111827]/60 backdrop-blur-md shadow-md px-4 py-6 z-10 left-0 right-0">
       <Link
         href="/"
-        className="text-2xl font-extrabold tracking-wide text-[#93C5FD]"
+        className="text-2xl sm:text-3xl font-extrabold tracking-wide text-[#93C5FD]"
       >
         ShopEase
       </Link>
