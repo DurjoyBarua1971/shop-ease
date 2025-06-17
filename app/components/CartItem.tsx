@@ -46,7 +46,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
         <button
           disabled={item.quantity <= 1}
           onClick={handleDecrement}
-          className="text-white px-2 py-1 rounded disabled:bg-gray-600 cursor-pointer disabled:cursor-default"
+          className="text-white px-2 py-1 rounded disabled:bg-gray-600 cursor-pointer disabled:cursor-not-allowed"
         >
           ▬
         </button>
@@ -54,7 +54,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
         <button
           disabled={stock === 0}
           onClick={handleIncrement}
-          className=" text-white px-2 py-1 rounded cursor-pointer disabled:cursor-default disabled:bg-gray-600"
+          className=" text-white px-2 py-1 rounded cursor-pointer disabled:bg-gray-600 disabled:cursor-not-allowed"
         >
           ✚
         </button>
