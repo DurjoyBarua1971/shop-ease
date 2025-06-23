@@ -2,6 +2,7 @@
 import { Product } from "../types";
 import { useCart } from "../context/CartContext";
 import Image from "next/image";
+import Button from "./Button";
 
 export default function ProductCard({ product }: { product: Product }) {
   const cartContext = useCart();
@@ -34,20 +35,24 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
       </div>
       <div className="flex items-center justify-between mt-4">
-        <h3 className="lg:text-2xl md:text-lg text-md font-bold truncate">{product.name}</h3>
+        <h3 className="lg:text-2xl md:text-lg text-md font-bold truncate">
+          {product.name}
+        </h3>
         <p className="text-blue-400 font-semibold text-lg">৳{product.price}</p>
       </div>
       <div className="flex mt-2 justify-between px-2">
         <p>⭐ {product.rating}</p>
         {stock > 0 && <p>👉 {stock} </p>}
       </div>
-      <button
+
+      <Button
         disabled={stock === 0}
         onClick={handleAddToCart}
-        className="my-4 bg-blue-500 text-white py-1 px-2 rounded disabled:bg-gray-400"
+        variant="secondary"
+        className="py-1 px-2 my-4"
       >
         {stock > 0 ? "Add to Cart" : "Out of Stock"}
-      </button>
+      </Button>
     </div>
   );
 }

@@ -1,0 +1,40 @@
+import clsx from "clsx";
+
+type ButtonProps = {
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  variant?: "primary" | "secondary"  |  "outline";
+  className?: string;
+  type?: "button" | "submit";
+};
+
+export default function Button({
+  children,
+  onClick,
+  disabled = false,
+  fullWidth = false,
+  variant = "primary",
+  className = "",
+  type = "button",
+}: ButtonProps) {
+  const baseClass = "rounded transition-colors font-medium";
+  const widthClass = fullWidth ? "w-full" : "";
+  const variantClass = {
+    primary: " bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400",
+    secondary: "bg-blue-500 text-white hover:bg-blue-700 disabled:bg-gray-600",
+    outline: "border border-blue-500 text-blue-500 hover:bg-blue-50 disabled:opacity-50",
+  }[variant];
+
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={clsx(baseClass, widthClass, variantClass, className)}      
+    >
+      {children}
+    </button>
+  );
+}
