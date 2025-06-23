@@ -41,6 +41,7 @@ function Navbar() {
             </span>
           )}
         </Link>
+        <a href="/auth/logout">Logout</a>
       </div>
     </nav>
   );
