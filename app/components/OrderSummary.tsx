@@ -2,6 +2,7 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 import { CartItem } from "../types";
 import Link from "next/link";
+import Button from "./Button";
 
 function OrderSummary() {
   const cartContext = useCart();
@@ -53,9 +54,9 @@ function OrderSummary() {
             </div>
           </div>
 
-          <button className="w-full mt-6 bg-blue-700 text-white font-medium py-3 rounded-lg hover:bg-blue-800 transition-colors">
+          <Button fullWidth variant="primary" className="mt-6 py-3 rounded-lg">
             Proceed to Checkout
-          </button>
+          </Button>
 
           <Link
             href="/products"

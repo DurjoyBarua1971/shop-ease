@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Button from "./components/Button";
 
 export default function NotFound() {
   const router = useRouter();
@@ -10,7 +11,9 @@ export default function NotFound() {
     <div className="flex flex-col items-center justify-center p-4 mt-16">
       <div className="w-full max-w-lg shadow-lg text-center bg-gray-900 rounded-lg p-8">
         <div className="mb-6">
-          <div className="text-8xl sm:text-9xl font-bold text-blue-500">404</div>
+          <div className="text-8xl sm:text-9xl font-bold text-blue-500">
+            404
+          </div>
           <h1 className="text-4xl font-bold text-white mt-4">Page Not Found</h1>
           <div className="text-gray-500 mt-4">
             The page you are looking for doesn't exist or has been moved.
@@ -18,12 +21,13 @@ export default function NotFound() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
-          <button
+          <Button
             onClick={() => router.back()}
-            className="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 transition"
+            variant="outline"
+            className="px-4 py-2 "
           >
             &#8592; Go Back
-          </button>
+          </Button>
           <Link
             href="/products"
             className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
