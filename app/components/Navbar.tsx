@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
-import React, { use } from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import { useCart } from "../context/CartContext";
 
-function Navbar() {
+function Navbar({session}: { session: object | null }) {
   const pathname = usePathname();
   const cartContext = useCart();
+
   if (!cartContext) {
     throw new Error("CartContext is not available");
   }
@@ -34,14 +35,14 @@ function Navbar() {
           Product
         </Link>
         <Link href="/cart" className={isActive("/cart")}>
-          🛒 Cart
+          Cart
           {itemCount > 0 && (
-            <span className="absolute bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold translate-x-33 -translate-y-8">
+            <span className="absolute bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold translate-x-25 -translate-y-9">
               {itemCount}
             </span>
           )}
         </Link>
-        <a href="/auth/logout">Logout</a>
+        {session && <a href="/auth/logout">⏻</a>}
       </div>
     </nav>
   );
