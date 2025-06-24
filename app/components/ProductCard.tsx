@@ -3,18 +3,16 @@ import { Product } from "../types";
 import { useCart } from "../context/CartContext";
 import Image from "next/image";
 import Button from "./Button";
+import { useRouter } from "next/navigation";
 
 export default function ProductCard({ product }: { product: Product }) {
   const cartContext = useCart();
   if (!cartContext) {
     throw new Error("CartContext is not available");
   }
-  const { state, dispatch } = cartContext;
-  const stock = state.productStock[product.id];
-
-  const handleAddToCart = () => {
-    dispatch({ type: "ADD_TO_CART", product });
-  };
+  const { state } = cartContext;
+  const stock = state.productStock[product.id] ?? 0;
+  const router = useRouter();
 
   return (
     <div className="border rounded p-4 flex flex-col bg-gray-900">
@@ -24,10 +22,14 @@ export default function ProductCard({ product }: { product: Product }) {
           alt={product.name}
           width={200}
           height={200}
-          className="w-full h-48 object-cover rounded"
+          loading="lazy"
+          className="w-full object-contain rounded"
         />
         {stock == 0 && (
-          <div className="absolute inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/70 bg-opacity-50 flex items-center justify-center"
+            aria-label="Product out of stock"
+          >
             <span className="text-white font-semibold text-lg">
               Out of Stock
             </span>
@@ -47,11 +49,12 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <Button
         disabled={stock === 0}
-        onClick={handleAddToCart}
+        aria-disabled={stock === 0}
         variant="secondary"
         className="py-1 px-2 my-4"
+        onClick={() => router.push(`/products/${product.id}`)}
       >
-        {stock > 0 ? "Add to Cart" : "Out of Stock"}
+        {stock > 0 ? "Buy Now" : "Out of Stock"}
       </Button>
     </div>
   );
