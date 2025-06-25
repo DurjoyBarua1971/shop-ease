@@ -18,6 +18,8 @@ const initialState: CartState = {
   ),
 };
 
+console.log("Initial product stock:", initialState.productStock);
+
 function cartReducer(state: CartState, action: any): CartState {
   const { cartItems, productStock } = state;
   switch (action.type) {

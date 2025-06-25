@@ -1,14 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { products as productList } from "../../lib/products";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
+import { ProductNotFound } from "@/app/components/ProductNotFound";
+import { AttributeSelector } from "@/app/components/AttributeSelector";
+import Button from "@/app/components/Button";
 
 const Product = () => {
   const { id } = useParams();
   const router = useRouter();
-  const product = productList.find((p) => p.id === id);
+  const product = useMemo(() => productList.find((p) => p.id === id), [id]);
   const cartContext = useCart();
   const [selectedAttributes, setSelectedAttributes] = useState<{
     [key: string]: string;
@@ -16,17 +19,7 @@ const Product = () => {
   const [currentVariation, setCurrentVariation] = useState<any>(null);
 
   if (!product) {
-    return (
-      <div className="min-h-screen bg-gray-800 text-white flex flex-col items-center justify-center">
-        <button
-          onClick={() => router.back()}
-          className="mb-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Back
-        </button>
-        <h1 className="text-2xl font-bold">Product Not Found</h1>
-      </div>
-    );
+    return <ProductNotFound onBack={() => router.back()} />;
   }
 
   if (!cartContext) {
@@ -108,33 +101,11 @@ const Product = () => {
               </div>
 
               {attributes.length > 0 && (
-                <div className="mt-6">
-                  <h3 className="font-bold text-white mb-4">Attributes:</h3>
-                  {attributes.map((attribute) => (
-                    <div key={attribute.name} className="mb-4">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
-                        {attribute.name}:
-                      </label>
-                      <div className="flex flex-wrap gap-2">
-                        {attribute.values.map((value) => (
-                          <button
-                            key={value}
-                            onClick={() =>
-                              handleAttributeChange(attribute.name, value)
-                            }
-                            className={`px-3 py-2 rounded border text-sm font-medium transition-colors ${
-                              selectedAttributes[attribute.name] === value
-                                ? "bg-blue-600 border-blue-600 text-white"
-                                : "bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"
-                            }`}
-                          >
-                            {value}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <AttributeSelector
+                  attributes={attributes}
+                  selectedAttributes={selectedAttributes}
+                  onAttributeChange={handleAttributeChange}
+                />
               )}
 
               <div className="mt-6">
@@ -155,17 +126,15 @@ const Product = () => {
                   </div>
                 </div>
 
-                <button
-                  onClick={handleAddToCart}
+                <Button
                   disabled={currentStock === 0}
-                  className={`w-full py-3 px-6 rounded-lg font-bold text-white transition-colors ${
-                    currentStock > 0
-                      ? "bg-blue-600 hover:bg-blue-700"
-                      : "bg-gray-600 cursor-not-allowed"
-                  }`}
+                  aria-disabled={currentStock === 0}
+                  variant="secondary"
+                  className="w-full py-3 px-6 rounded-lg"
+                  onClick={handleAddToCart}
                 >
                   {currentStock > 0 ? "Add to Cart" : "Out of Stock"}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
