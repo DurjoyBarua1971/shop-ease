@@ -7,27 +7,36 @@ import Image from "next/image";
 import { ProductNotFound } from "@/app/components/ProductNotFound";
 import { AttributeSelector } from "@/app/components/AttributeSelector";
 import Button from "@/app/components/Button";
+import { Variation } from "@/app/types";
+import Loading from "@/app/components/Loading";
 
 const Product = () => {
   const { id } = useParams();
   const router = useRouter();
-  const product = useMemo(() => productList.find((p) => p.id === id), [id]);
-  const cartContext = useCart();
-  const [selectedAttributes, setSelectedAttributes] = useState<{
-    [key: string]: string;
-  }>({});
-  const [currentVariation, setCurrentVariation] = useState<any>(null);
-
+  const product = productList.find((p) => p.id === id);
   if (!product) {
     return <ProductNotFound onBack={() => router.back()} />;
   }
 
+  const cartContext = useCart();
   if (!cartContext) {
     throw new Error("CartContext is not available");
   }
 
+  const [selectedAttributes, setSelectedAttributes] = useState<{
+    [key: string]: string;
+  }>({});
+  const [currentVariation, setCurrentVariation] = useState<Variation | null>(
+    null
+  );
+
+  const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = cartContext;
   const { name, price, rating, description, attributes, variations } = product;
+
+  const hasStockData = useMemo(() => {
+    return state.productStock && state.productStock[product.id];
+  }, [state.productStock, product.id]);
 
   useEffect(() => {
     if (attributes.length > 0) {
@@ -37,6 +46,7 @@ const Product = () => {
       });
       setSelectedAttributes(initialAttributes);
     }
+    setIsLoading(false);
   }, [attributes]);
 
   useEffect(() => {
@@ -47,13 +57,23 @@ const Product = () => {
             v.attributes[key as keyof typeof v.attributes] === value
         );
       });
-      setCurrentVariation(variation);
+      setCurrentVariation(variation || null);
     }
   }, [selectedAttributes, variations]);
 
   const currentPrice = currentVariation?.price || price;
-  const currentStock =
-    currentVariation?.stock || state.productStock[product.id] || 0;
+
+  const currentStock = useMemo(() => {
+    if (!hasStockData) return 0;
+
+    if (currentVariation?.sku) {
+      return (
+        state.productStock[product.id]?.variations?.[currentVariation.sku]
+          ?.stock || 0
+      );
+    }
+    return state.productStock[product.id]?.stock || 0;
+  }, [hasStockData, currentVariation, state.productStock, product.id]);
 
   const handleAttributeChange = (attributeName: string, value: string) => {
     setSelectedAttributes((prev) => ({
@@ -63,10 +83,29 @@ const Product = () => {
   };
 
   const handleAddToCart = () => {
+    if (!hasStockData) {
+      console.error("Stock data not available");
+      return;
+    }
+
+    const currentProduct = {
+      variant: currentVariation,
+      product: {
+        id: product.id,
+        name: product.name,
+        price: currentPrice,
+        stock: currentStock,
+        image: product.image,
+      },
+    };
     if (currentStock > 0) {
-      dispatch({ type: "ADD_TO_CART", product });
+      dispatch({ type: "ADD_TO_CART", currentProduct });
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white px-2 py-6 sm:px-4">
@@ -83,10 +122,10 @@ const Product = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                width={260}
-                height={260}
+                width={100}
+                height={100}
                 priority={true}
-                className="w-full max-w-xs object-contain rounded"
+                className="w-full object-fill rounded"
               />
             </div>
             <div className="w-full md:w-1/2">
@@ -127,8 +166,8 @@ const Product = () => {
                 </div>
 
                 <Button
-                  disabled={currentStock === 0}
-                  aria-disabled={currentStock === 0}
+                  disabled={currentStock === 0 || !hasStockData}
+                  aria-disabled={currentStock === 0 || !hasStockData}
                   variant="secondary"
                   className="w-full py-3 px-6 rounded-lg"
                   onClick={handleAddToCart}

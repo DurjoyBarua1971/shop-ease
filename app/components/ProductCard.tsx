@@ -11,7 +11,7 @@ export default function ProductCard({ product }: { product: Product }) {
     throw new Error("CartContext is not available");
   }
   const { state } = cartContext;
-  const stock = state.productStock[product.id] ?? 0;
+  const stock = state.productStock[product.id].stock ?? 0;
   const router = useRouter();
 
   return (

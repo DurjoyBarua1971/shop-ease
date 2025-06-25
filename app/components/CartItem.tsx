@@ -11,35 +11,89 @@ function CartItemComponent({ item }: { item: CartItem }) {
   }
 
   const { state, dispatch } = cartContext;
-  const stock = state.productStock[item.id];
+
+  const { variant, product, quantity } = item;
+  const { id, image, name, price } = product;
+  const stock = variant
+    ? state.productStock[id]?.variations?.[variant.sku]?.stock
+    : state.productStock[id].stock ?? 0;
+
+  
 
   const handleRemoveFromCart = () => {
-    dispatch({ type: "REMOVE_FROM_CART", id: item.id });
+    if (item.variant) {
+      dispatch({
+        type: "REMOVE_FROM_CART",
+        productIdentity: {
+          id: id,
+          variant: item.variant,
+        },
+      });
+    } else dispatch({ type: "REMOVE_FROM_CART", productIdentity: { id: id } });
   };
 
   const handleIncrement = () => {
-    dispatch({ type: "ADJUST_QUANTITY", id: item.id, delta: 1 });
+    if (item.variant) {
+      dispatch({
+        type: "ADJUST_QUANTITY",
+        productIdentity: {
+          id: id,
+          variant: item.variant,
+        },
+        delta: 1,
+      });
+    } else
+      dispatch({
+        type: "ADJUST_QUANTITY",
+        productIdentity: { id: id },
+        delta: 1,
+      });
   };
 
   const handleDecrement = () => {
-    dispatch({ type: "ADJUST_QUANTITY", id: item.id, delta: -1 });
+    if (item.variant) {
+      dispatch({
+        type: "ADJUST_QUANTITY",
+        productIdentity: {
+          id: id,
+          variant: item.variant,
+        },
+        delta: -1,
+      });
+    } else
+      dispatch({
+        type: "ADJUST_QUANTITY",
+        productIdentity: { id: id },
+        delta: -1,
+      });
   };
 
   return (
     <div className="flex flex-col p-4 sm:p-6 sm:flex-row sm:items-center space-y-10 sm:space-y-0 sm:space-x-4 sm:justify-between">
       <div className="flex items-center space-x-4 justify-center sm:justify-start">
         <Image
-          src={item.image}
-          alt={item.name}
+          src={image}
+          alt={name}
           width={80}
           height={80}
           className="object-cover rounded-lg"
         />
         <div className="sm:flex-1 sm:min-w-0">
-          <h3 className="text-lg font-semibold text-white truncate">
-            {item.name}
-          </h3>
-          <p className="text-blue-400 font-semibold text-lg">৳ {item.price}</p>
+          <div>
+            <h3 className="text-lg font-semibold text-white truncate">
+              {name}
+            </h3>
+            {variant && (
+              <p className="text-sm text-gray-400">
+                {Object.entries(variant.attributes).map(([key, value]) => (
+                  <span key={key} className="inline-block mr-1">
+                    <span>{key}</span>: {value}
+                  </span>
+                ))}
+              </p>
+            )}
+          </div>
+          <p className="text-blue-400 font-semibold text-lg">৳ {price}</p>
         </div>
       </div>
       <div className="flex items-center justify-center space-x-3">
@@ -59,7 +113,7 @@ function CartItemComponent({ item }: { item: CartItem }) {
           ✚
         </button>
         <div className="relative">
-          <span>৳ {item.price * item.quantity}</span>
+          <span>৳ {price * quantity}</span>
           <button
             onClick={handleRemoveFromCart}
             className="px-4 sm:top-0 sm:right-0 sm:transform sm:translate-x-5 sm:-translate-y-8 rounded absolute  hover:cursor-pointer transition-colors"

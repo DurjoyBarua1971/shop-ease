@@ -25,11 +25,23 @@ export type Variation = {
   price: number;
 };
 
-export type CartItem = Product & {
+export type CartItem = CurrentProduct & {
   quantity: number;
 };
 
 export type CartState = {
   cartItems: CartItem[];
-  productStock: Record<string, number>;
+  productStock: Record<string, { stock: number; price: number, variations: Record<string, { stock: number; price: number }> }>;
 };
+
+
+export type CurrentProduct = {
+  variant: Variation | undefined;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    stock: number;
+    image: string;
+  };
+}
