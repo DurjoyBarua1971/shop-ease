@@ -5,7 +5,7 @@ import Button from "./components/Button";
 
 export default async function Home() {
   const session = await auth0.getSession();
-  console.log("Session:", session);
+  // console.log("Session:", session);
 
   if (!session) {
     return (

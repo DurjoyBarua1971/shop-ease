@@ -11,7 +11,7 @@ function OrderSummary() {
   }
   const { state } = cartContext;
   const subtotal = state.cartItems.reduce(
-    (sum: number, item: CartItem) => sum + item.price * item.quantity,
+    (sum: number, item: CartItem) => sum + (item.variant ? item.variant?.price * item.quantity : item.product.price * item.quantity),
     0
   );
   const discount = subtotal * 0.2;

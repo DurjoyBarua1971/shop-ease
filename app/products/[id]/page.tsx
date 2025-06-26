@@ -9,6 +9,7 @@ import { AttributeSelector } from "@/app/components/AttributeSelector";
 import Button from "@/app/components/Button";
 import { Variation } from "@/app/types";
 import Loading from "@/app/components/Loading";
+import Review from "@/app/components/Review";
 
 const Product = () => {
   const { id } = useParams();
@@ -89,7 +90,7 @@ const Product = () => {
     }
 
     const currentProduct = {
-      variant: currentVariation,
+      variant: currentVariation ?? undefined,
       product: {
         id: product.id,
         name: product.name,
@@ -108,7 +109,7 @@ const Product = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-2 py-6 sm:px-4">
+    <div className="min-h-screen bg-gray-900 text-white px-2 py-6 sm:px-4 flex flex-col gap-5">
       <div className="max-w-4xl mx-auto">
         <button
           onClick={() => router.back()}
@@ -122,8 +123,8 @@ const Product = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                width={100}
-                height={100}
+                width={500}
+                height={500}
                 priority={true}
                 className="w-full object-fill rounded"
               />
@@ -178,6 +179,9 @@ const Product = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="max-w-4xl mx-auto">
+        <Review id={product.id} />                
       </div>
     </div>
   );

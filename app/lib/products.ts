@@ -5,7 +5,7 @@ export const products = [
     description: "Experience seamless productivity with this high-performance laptop, featuring a sleek design, powerful processor, and vibrant display. Perfect for work, gaming, or creative projects, it offers customizable storage and color options to suit your style.",
     price: 75000,
     stock: 10,
-    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&h=500&fit=crop",
     rating: 4.5,
     created: "2024-05-01",
     attributes: [

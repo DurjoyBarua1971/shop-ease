@@ -84,10 +84,10 @@ function CartItemComponent({ item }: { item: CartItem }) {
               {name}
             </h3>
             {variant && (
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-300">
                 {Object.entries(variant.attributes).map(([key, value]) => (
                   <span key={key} className="inline-block mr-1">
-                    <span>{key}</span>: {value}
+                    <span className="text-gray-400">{key}</span>: {value}
                   </span>
                 ))}
               </p>

@@ -20,9 +20,8 @@ export default function ProductCard({ product }: { product: Product }) {
         <Image
           src={product.image}
           alt={product.name}
-          width={200}
-          height={200}
-          loading="lazy"
+          width={300}
+          height={300}
           className="w-full object-contain rounded"
         />
         {stock == 0 && (
