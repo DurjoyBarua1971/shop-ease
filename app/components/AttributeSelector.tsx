@@ -1,7 +1,5 @@
-interface Attribute {
-  name: string;
-  values: string[];
-}
+import { Attribute } from "../types";
+
 
 export const AttributeSelector: React.FC<{
   attributes: Attribute[];

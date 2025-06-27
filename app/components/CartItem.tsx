@@ -2,6 +2,7 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 import { CartItem } from "../types";
 import Image from "next/image";
+import Button from "./Button";
 
 function CartItemComponent({ item }: { item: CartItem }) {
   const cartContext = useCart();
