@@ -1,39 +1,18 @@
 "use client";
 
 import React, { createContext, useContext, useMemo } from "react";
-import { CartItem, CartState, CurrentProduct, Variation } from "../types";
+import {
+  CartAction,
+  CartContextType,
+  CartItem,
+  CartState,
+  CurrentProduct,
+  Variation,
+} from "../types";
 import { products } from "../lib/products";
-
-type CartAction = AddToCartAction | RemoveFromCartAction | AdjustQuantityAction;
-
-interface CartContextType {
-  state: CartState;
-  dispatch: React.Dispatch<CartAction>;
-}
+import { StockData } from "../types/cart";
 
 const CartContext = createContext<CartContextType | null>(null);
-
-interface AddToCartAction {
-  type: "ADD_TO_CART";
-  currentProduct: CurrentProduct;
-}
-
-interface RemoveFromCartAction {
-  type: "REMOVE_FROM_CART";
-  productIdentity: {
-    id: string;
-    variant?: Variation;
-  };
-}
-
-interface AdjustQuantityAction {
-  type: "ADJUST_QUANTITY";
-  productIdentity: {
-    id: string;
-    variant?: Variation;
-  };
-  delta: number;
-}
 
 function findCartItem(
   cartItems: CartItem[],
@@ -67,21 +46,6 @@ function updateCartQuantity(
 
   return updatedItems;
 }
-
-type StockData = Record<
-  string,
-  {
-    stock: number;
-    price: number;
-    variations: Record<
-      string,
-      {
-        stock: number;
-        price: number;
-      }
-    >;
-  }
->;
 
 function updateStock(
   productStock: StockData,
