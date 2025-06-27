@@ -2,7 +2,6 @@ import React from "react";
 import { useCart } from "../context/CartContext";
 import { CartItem } from "../types";
 import Image from "next/image";
-import Button from "./Button";
 
 function CartItemComponent({ item }: { item: CartItem }) {
   const cartContext = useCart();
@@ -18,8 +17,6 @@ function CartItemComponent({ item }: { item: CartItem }) {
   const stock = variant
     ? state.productStock[id]?.variations?.[variant.sku]?.stock
     : state.productStock[id].stock ?? 0;
-
-  
 
   const handleRemoveFromCart = () => {
     if (item.variant) {

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { reviews } from "../lib/reviews";
 import Image from "next/image";
 import clsx from "clsx";
+import StarRating from "./StarRating";
+import CircularRating from "./CircularRating";
 
 function Review({ id }: { id: string }) {
-  const [selectedFilter, setSelectedFilter] = useState("All Reviews");
   const product_review = reviews.find((r) => r.id === id);
 
   if (!product_review) {
@@ -12,30 +13,6 @@ function Review({ id }: { id: string }) {
   }
 
   const { reviews_summary, reviews: reviewsList } = product_review;
-
-  const StarRating = ({
-    rating,
-    size = "sm",
-  }: {
-    rating: number;
-    size?: "sm" | "lg";
-  }) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <svg
-            key={star}
-            className={`${size === "lg" ? "w-5 h-5" : "w-4 h-4"} ${
-              star <= rating ? "text-yellow-400" : "text-gray-300"
-            } fill-current`}
-            viewBox="0 0 20 20"
-          >
-            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-          </svg>
-        ))}
-      </div>
-    );
-  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -53,35 +30,7 @@ function Review({ id }: { id: string }) {
 
       <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8 mb-6 md:mb-8 p-4">
         <div className="flex text-center justify-center items-center gap-5">
-          <div className="relative w-16 h-16 md:w-20 md:h-20 mx-auto md:mx-0 mb-2">
-            <svg
-              className="w-full h-full transform rotate-90"
-              viewBox="0 0 36 36"
-            >
-              <path
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                fill="none"
-                stroke="#374151"
-                strokeWidth="2"
-              />
-              <path
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                fill="none"
-                stroke="#fb923c"
-                strokeWidth="2"
-                strokeDasharray={`${
-                  (reviews_summary.average_star / 5) * 100
-                }, 100`}
-                strokeLinecap="round"
-              />
-            </svg>
-            {/* Rating text */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-lg md:text-2xl font-bold text-white">
-                {reviews_summary.average_star}
-              </span>
-            </div>
-          </div>
+          <CircularRating rating={reviews_summary.average_star}/>
 
           <div className="">
             <StarRating
@@ -130,7 +79,6 @@ function Review({ id }: { id: string }) {
         </div>
       </div>
 
-      {/* Review Filters */}
       <div className="mb-4 md:mb-6">
         <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">
           Review Lists

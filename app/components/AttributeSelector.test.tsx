@@ -4,7 +4,6 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import "@testing-library/jest-dom/vitest";
 import { AttributeSelector } from "./AttributeSelector";
-import { after } from "node:test";
 
 describe("AttributeSelector Component", () => {
   const mockOnAttributeChange = vi.fn();
