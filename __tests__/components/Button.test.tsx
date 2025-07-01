@@ -3,7 +3,8 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import "@testing-library/jest-dom/vitest";
-import Button from "./Button";
+import Button from "@/app/components/Button";
+
 
 describe("Button Component", () => {
   it("renders button with default props", () => {

@@ -3,7 +3,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import "@testing-library/jest-dom/vitest";
-import { AttributeSelector } from "./AttributeSelector";
+import { AttributeSelector } from "../../app/components/AttributeSelector";
 
 describe("AttributeSelector Component", () => {
   const mockOnAttributeChange = vi.fn();
