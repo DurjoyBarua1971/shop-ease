@@ -50,7 +50,7 @@ function Review({ id }: { id: string }) {
           <Button
             variant="primary"
             onClick={handleLoadMore}
-            className="px-6 py-2"
+            className="px-3 py-2 rounded-lg"
           >
             Load More
           </Button>
