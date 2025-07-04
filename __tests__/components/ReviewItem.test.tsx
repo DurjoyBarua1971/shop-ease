@@ -1,9 +1,10 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
 import React from "react";
 import "@testing-library/jest-dom/vitest";
 import ReviewItem from "@/app/components/ReviewItem";
 import { Review } from "@/app/types";
+
 
 const mockReview: Review = {
   star: 3,
@@ -17,6 +18,15 @@ const mockReview: Review = {
 const mockFormatDate = (dateString: string) => dateString;
 
 describe("ReviewItem Component", () => {
+  beforeEach(() => {
+    cleanup();
+  });
+
+  afterEach(() => {
+    cleanup();
+
+  });
+
   it("renders review with default props", () => {
     render(<ReviewItem review={mockReview} formatDate={mockFormatDate} />);
     expect(screen.getByText("Samantha Lee")).toBeInTheDocument();

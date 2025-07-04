@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { cleanup, render } from "@testing-library/react";
 import React from "react";
 import "@testing-library/jest-dom/vitest";
 import StarRating from "@/app/components/StarRating";
