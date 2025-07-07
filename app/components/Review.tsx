@@ -7,7 +7,7 @@ import Button from "./Button";
 
 function Review({ id }: { id: string }) {
   const product_review = reviews.find((r) => r.id === id);
-  const [visibleReviews, setVisibleReviews] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
   const reviewsPerPage = 2;
 
   if (!product_review) {
@@ -15,15 +15,26 @@ function Review({ id }: { id: string }) {
   }
 
   const { reviews_summary, reviews: reviewsList } = product_review;
-  const hasMoreReviews = visibleReviews < reviewsList.length;
+  const totalPages = Math.ceil(reviewsList.length / reviewsPerPage);
+  const startIndex = (currentPage - 1) * reviewsPerPage;
+  const endIndex = startIndex + reviewsPerPage;
+  const displayedReviews = reviewsList.slice(startIndex, endIndex);
 
-  const handleLoadMore = () => {
-    setVisibleReviews((prev) =>
-      Math.min(prev + reviewsPerPage, reviewsList.length)
-    );
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
-  const displayedReviews = reviewsList.slice(0, visibleReviews);
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-6 bg-gray-800">
@@ -41,25 +52,52 @@ function Review({ id }: { id: string }) {
 
       <div className="space-y-4 md:space-y-6">
         {displayedReviews.map((review, index) => (
-          <ReviewItem key={index} review={review} formatDate={formatDate} />
+          <ReviewItem key={startIndex + index} review={review} formatDate={formatDate} />
         ))}
       </div>
 
-      {hasMoreReviews && (
-        <div className="mt-6 text-center">
+      {totalPages > 1 && (
+        <div className="mt-6 flex justify-center items-center gap-2">
           <Button
             variant="primary"
-            onClick={handleLoadMore}
-            className="px-3 py-2 rounded-lg"
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+            className="px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Load More
+            Previous
+          </Button>
+          
+          <div className="flex gap-1">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <Button
+                key={index + 1}
+                variant={currentPage === index + 1 ? "primary" : "secondary"}
+                onClick={() => handlePageChange(index + 1)}
+                className={`px-3 py-2 rounded-lg ${
+                  currentPage === index + 1 
+                    ? "bg-blue-600 text-white" 
+                    : "bg-gray-600 text-gray-300 hover:bg-gray-500"
+                }`}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+
+          <Button
+            variant="primary"
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className="px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Next
           </Button>
         </div>
       )}
 
-      {!hasMoreReviews && reviewsList.length > 3 && (
+      {totalPages <= 1 && reviewsList.length > 0 && (
         <div className="mt-6 text-center">
-          <p className="text-gray-400 text-sm">All reviews loaded</p>
+          <p className="text-gray-400 text-sm">All reviews displayed</p>
         </div>
       )}
     </div>

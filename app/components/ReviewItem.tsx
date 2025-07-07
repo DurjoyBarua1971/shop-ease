@@ -43,7 +43,7 @@ export default function ReviewItem({ review, formatDate }: ReviewItemProps) {
               <button className="flex items-center gap-1 text-gray-600 hover:text-gray-800 touch-manipulation">
                 👍
                 <span className="text-xs md:text-sm text-white">
-                  {Math.floor(Math.random() * 200) + 10}
+                  {review.user_name.length * 20 + 10}
                 </span>
               </button>
             </div>
