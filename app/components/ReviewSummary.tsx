@@ -8,6 +8,7 @@ interface ReviewSummaryProps {
 }
 
 export default function ReviewSummary({ reviewsSummary }: ReviewSummaryProps) {
+  console.log("ReviewSummary", reviewsSummary);
   return (
     <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8 mb-6 md:mb-8 p-4">
       <div className="flex text-center justify-center items-center gap-5">
