@@ -11,7 +11,7 @@ function Review({ id }: { id: string }) {
   const reviewsPerPage = 2;
 
   if (!product_review) {
-    return <div>No reviews found</div>;
+    return <div className="p-4 text-center text-gray-400">No reviews found</div>;
   }
 
   const { reviews_summary, reviews: reviewsList } = product_review;
@@ -37,8 +37,8 @@ function Review({ id }: { id: string }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-6 bg-gray-800">
-      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+    <div className="max-w-4xl mx-auto p-4 md:p-6 bg-gray-800 rounded-lg shadow-lg">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">
         Product Reviews
       </h2>
 
@@ -57,23 +57,23 @@ function Review({ id }: { id: string }) {
       </div>
 
       {totalPages > 1 && (
-        <div className="mt-6 flex justify-center items-center gap-2">
+        <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-2">
           <Button
             variant="primary"
             onClick={handlePrevious}
             disabled={currentPage === 1}
-            className="px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
           >
             Previous
           </Button>
           
-          <div className="flex gap-1">
+          <div className="flex gap-1 w-full sm:w-auto justify-center">
             {Array.from({ length: totalPages }, (_, index) => (
               <Button
                 key={index + 1}
                 variant={currentPage === index + 1 ? "primary" : "secondary"}
                 onClick={() => handlePageChange(index + 1)}
-                className={`px-3 py-2 rounded-lg ${
+                className={`px-3 py-2 rounded-lg w-full sm:w-auto ${
                   currentPage === index + 1 
                     ? "bg-blue-600 text-white" 
                     : "bg-gray-600 text-gray-300 hover:bg-gray-500"
@@ -88,7 +88,7 @@ function Review({ id }: { id: string }) {
             variant="primary"
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className="px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
           >
             Next
           </Button>

@@ -5,17 +5,62 @@ export const reviews: ProductReview[] = [
     id: "1",
     name: "Laptop",
     reviews_summary: {
-      number_of_reviewers: 5,
+      number_of_reviewers: 10,
       average_star: 4.2,
       star_distribution: {
-        "5": 1,
-        "4": 2,
-        "3": 1,
-        "2": 1,
+        "5": 2,
+        "4": 4,
+        "3": 2,
+        "2": 2,
         "1": 0,
       },
     },
     reviews: [
+      {
+        star: 5,
+        product_review:
+          "This laptop is a game-changer! The performance is lightning-fast, and the display is stunning. I got the Silver 512GB version, and it handles multitasking like a dream. Highly recommend for professionals and gamers alike!",
+        time: "2024-06-10T14:30:00Z",
+        user_name: "Alex Johnson",
+        user_image:
+          "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?w=100&h=100&fit=crop",
+      },
+      {
+        star: 4,
+        product_review:
+          "Really solid laptop with a sleek design. The Black 256GB model is perfect for my work needs, though the battery life could be a bit better for long sessions. Overall, very satisfied!",
+        time: "2024-05-15T09:45:00Z",
+        user_name: "Samantha Lee",
+        user_image:
+          "https://images.pexels.com/photos/1239288/pexels-photo-1239288.jpeg?w=100&h=100&fit=crop",
+      },
+      {
+        star: 4,
+        product_review:
+          "Great value for the price! The processor is powerful, and the display is vibrant. I wish the 512GB version had more stock, but the Silver model I got works flawlessly for editing.",
+        time: "2024-06-01T11:20:00Z",
+        user_name: "Michael Chen",
+        user_image:
+          "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?w=100&h=100&fit=crop",
+      },
+      {
+        star: 3,
+        product_review:
+          "The laptop is decent for everyday tasks, but it gets quite warm during intensive work. The Black 256GB version serves my basic needs, though I expected better cooling for the price.",
+        time: "2024-05-28T14:15:00Z",
+        user_name: "Jessica Taylor",
+        user_image:
+          "https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?w=100&h=100&fit=crop",
+      },
+      {
+        star: 2,
+        product_review:
+          "Had high expectations but the laptop came with a few dead pixels on the screen. Customer service was helpful in getting a replacement, but it was inconvenient. The Silver 512GB model works fine now.",
+        time: "2024-05-22T10:30:00Z",
+        user_name: "Robert Anderson",
+        user_image:
+          "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?w=100&h=100&fit=crop",
+      },
       {
         star: 5,
         product_review:
